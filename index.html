@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Jatsini</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            font-family: 'Playfair Display', serif;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Extensión de animaciones Tailwind */
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+        @keyframes fadeDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 1.5s ease-in-out forwards;
+        }
+
+        .animate-fade-down {
+            animation: fadeDown 1.5s ease-in-out forwards;
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        .fade-out {
+            animation: fadeOut 2s ease-in-out forwards;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen relative bg-black">
+
+    <!-- Imagenes -->
+    <div class="absolute top-0 left-0 w-full h-full z-0">
+        <img src="foto1.jpg" alt="Foto 1" class="absolute top-0 left-0 w-full h-full object-cover image hidden">
+        <img src="foto2.jpg" alt="Foto 2" class="absolute top-0 left-0 w-full h-full object-cover image hidden">
+        <img src="foto3.jpg" alt="Foto 3" class="absolute top-0 left-0 w-full h-full object-cover image hidden">
+    </div>
+
+
+    <!-- Encabezado -->
+    <div class="absolute w-full h-full top-0 left-0 z-10">
+        <div class="absolute w-full h-full top-0 left-0 z-10 pt-20">
+            <h1 class="text-7xl text-white text-center opacity-0 animate-fade-in-up">Jatsini Abigail</h1>
+            <h2 class="text-5xl text-white text-center opacity-0 animate-fade-in-up delay-500">Mis XV's</h2>
+        </div>
+    </div>
+
+
+    <!-- Información del Pase -->
+    <div class="absolute w-full left-0 bottom-32 z-10">
+        <div class="relative w-full h-auto text-center text-white">
+            <h2 class="text-6xl font-semibold opacity-0 animate-fade-down delay-1000">🎟️ <br> Pase para 2 Personas</h2>
+        </div>
+    </div>
+
+    <span class="absolute top-0 left-0 z-0 bg-black/40 h-full w-full"></span>
+</body>
+
+
+<script>
+    const images = document.querySelectorAll(".image");
+    let currentIndex = 0;
+
+    function cycleImages() {
+        // Oculta la imagen actual con fade-out
+        images[currentIndex].classList.remove("fade-in");
+        images[currentIndex].classList.add("fade-out");
+
+        // Actualiza el índice para mostrar la siguiente imagen
+        currentIndex = (currentIndex + 1) % images.length;
+
+        // Muestra la nueva imagen con fade-in después de 2s (coincide con fade-out)
+        setTimeout(() => {
+            images.forEach((img) => img.classList.add("hidden"));
+            images[currentIndex].classList.remove("fade-out", "hidden");
+            images[currentIndex].classList.add("fade-in");
+        }, 2000);
+    }
+
+    // Inicialización
+    images[currentIndex].classList.remove("hidden");
+    images[currentIndex].classList.add("fade-in");
+
+    // Ciclo infinito cada 4s
+    setInterval(cycleImages, 4000);
+</script>
+
+</html>
